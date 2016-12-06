@@ -1,6 +1,6 @@
 # Cordova Hello World Plugin
 
-Simple plugin that returns your string prefixed with hello.
+Simple plugin that create a csv file and store the output of opensmile tool for audio recordings.
 
 Greeting a user with "Hello, world" is something that could be done in JavaScript. This plugin provides a simple example demonstrating how Cordova plugins work.
 
@@ -8,12 +8,12 @@ Greeting a user with "Hello, world" is something that could be done in JavaScrip
 
 Create a new Cordova Project
 
-    $ cordova create hello com.example.helloapp Hello
+    $ cordova create opensmile com.example.opensmileapp OpenSmile
     
 Install the plugin
 
     $ cd hello
-    $ cordova plugin add https://github.com/don/cordova-plugin-hello.git
+    $ cordova plugin add https://github.com/nithinth7/plugin-opensmile.git
     
 
 Edit `www/js/index.js` and add the following code inside `onDeviceReady`
@@ -24,15 +24,30 @@ Edit `www/js/index.js` and add the following code inside `onDeviceReady`
     }
 
     var failure = function() {
-        alert("Error calling Hello Plugin");
+        alert("Error calling OpenSmile Plugin");
     }
-
-    hello.greet("World", success, failure);
 ```
 
-Install iOS or Android platform
+### To start opensmile
+```js
+    opensmile.start(fname, fpath, success, failure);
+```	
+	Params:
+		fname: name of the csv file to store opensmile output.
+		fpath: path of the csv file to store in the device.
+		success: success callback.
+		failure: failure callback.
 
-    cordova platform add ios
+### To stop opensmile
+```js	
+	opensmile.stop("Stop", success, failure);
+```	
+	Params:
+		success: success callback.
+		failure: failure callback.
+		
+Install Android platform
+
     cordova platform add android
     
 Run the code

@@ -1,8 +1,8 @@
 # Cordova Hello World Plugin
 
-Simple plugin that create a csv file and store the output of opensmile tool for audio recordings.
+Plugin that create a csv file and store the output of opensmile tool for audio recordings.
 
-Greeting a user with "Hello, world" is something that could be done in JavaScript. This plugin provides a simple example demonstrating how Cordova plugins work.
+This plugin can be used to get live output from oopensmile tool. It will create a csv file and store it in the specified location in the device.
 
 ## Using
 

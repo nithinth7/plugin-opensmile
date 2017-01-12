@@ -1,4 +1,4 @@
-# Cordova Hello World Plugin
+# Cordova opensmile Plugin
 
 Plugin that create a csv file and store the output of opensmile tool for audio recordings.
 

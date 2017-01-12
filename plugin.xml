@@ -22,6 +22,11 @@
         <param name="android-package" value="myjni.OpenSmile"/>
       </feature>
     </config-file>
+	<config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.INTERNET"/>
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<uses-permission android:name="android.permission.RECORD_AUDIO" />
+    </config-file>
 
     <source-file src="src/android/myjni" target-dir="src/"/>
     <source-file src="src/android/assets" target-dir="src/"/>

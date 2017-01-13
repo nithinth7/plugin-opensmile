@@ -30,8 +30,8 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
         this.act = act;
         SmileJNI.registerListener(this);
 		pname = act.getPackageName();
-		fpath = '/Android/data/' + pname + '/ files';
-		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + '/Android/data/com.ionicframework.radarquestionnaire403517/files/');
+		fpath = "/Android/data/" + pname + "/ files";
+		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.ionicframework.radarquestionnaire403517/files/");
         fileName = name;
         dir.mkdirs();
         file = new File(dir, fileName);

@@ -29,8 +29,7 @@ public class OpenSmile extends CordovaPlugin {
         if (action.equals("start")) {
             String name = data.getString(0);
             String path = data.getString(1);
-            String message = "Start SmileExtract: " + path + "/" + name;
-            callbackContext.success(message);
+            String fpath;
             setupAssets();
             try {
                 m = new OpenSmilePlugins(cordova.getActivity(), name, path);
@@ -38,6 +37,9 @@ public class OpenSmile extends CordovaPlugin {
             } catch (Exception e) {
                 System.out.println("Exception" + e);
             }
+			fpath = m.getFilePath();
+			String message = "Start SmileExtract: " + fpath + "/" + name;
+            callbackContext.success(message);
             return true;
         } else if (action.equals("stop")) {
                 String name = data.getString(0);

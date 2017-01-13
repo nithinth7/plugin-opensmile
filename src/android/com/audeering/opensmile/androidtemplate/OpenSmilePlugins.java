@@ -29,7 +29,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
     public OpenSmilePlugins(Activity act, String name, String filePath) throws IOException {
         this.act = act;
         SmileJNI.registerListener(this);
-        dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + filePath);
+        dir = new File (filePath);//Environment.getExternalStorageDirectory().getAbsolutePath() + filePath);
         fileName = name;
         dir.mkdirs();
         file = new File(dir, fileName);

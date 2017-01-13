@@ -74,7 +74,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
     public void closeFile() throws IOException {
         outputStreamWriter.close();
     }
-	public void getFilPath() throws IOException {
+	public String getFilPath() throws IOException {
         return fpath;
 	}
 }

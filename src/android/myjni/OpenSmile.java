@@ -29,6 +29,7 @@ public class OpenSmile extends CordovaPlugin {
         if (action.equals("start")) {
             String name = data.getString(0);
             String path = data.getString(1);
+			//path = path.substring(7,path.length());
             String fpath = "";
             setupAssets();
             try {

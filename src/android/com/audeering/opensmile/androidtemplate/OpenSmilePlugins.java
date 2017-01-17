@@ -22,7 +22,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
     public static String fileName;
     public static OutputStreamWriter outputStreamWriter;
     public File file;
-    public String path, fpath, fpath1, pname;
+    public String path, fpath, fpath1, fpath2, pname;
     File dir;
     private static Activity act;
 
@@ -31,8 +31,10 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
         SmileJNI.registerListener(this);
 		pname = act.getPackageName();
 		fpath = "/Android/data/" + pname + "/files";
-		fpath1 =  Environment.getExternalStorageDirectory().getAbsolutePath() + fpath;
-		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + fpath);
+		//fpath1 =  filePath;
+		fpath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + fpath;
+		fpath1 = filePath + " |path2| " + fpath2;
+		dir = new File (filePath);//Environment.getExternalStorageDirectory().getAbsolutePath() + fpath);
         fileName = name;
         dir.mkdirs();
         file = new File(dir, fileName);

@@ -39,7 +39,7 @@ public class OpenSmile extends CordovaPlugin {
                 System.out.println("Exception" + e);
             }
 			
-			String message = "Start SmileExtract: File path :" + fpath + ":" + name;
+			String message = "Start SmileExtract: File path :" + path + ":" + name;
             callbackContext.success(message);
             return true;
         } else if (action.equals("stop")) {

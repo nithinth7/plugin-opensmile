@@ -22,7 +22,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
     public static String fileName;
     public static OutputStreamWriter outputStreamWriter;
     public File file;
-    public String path, fpath, pname;
+    public String path, fpath, fpath1, pname;
     File dir;
     private static Activity act;
 
@@ -30,8 +30,9 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
         this.act = act;
         SmileJNI.registerListener(this);
 		pname = act.getPackageName();
-		fpath = "/Android/data/" + pname + "/ files";
-		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.ionicframework.radarquestionnaire403517/files/");
+		fpath = "/Android/data/" + pname + "/files";
+		fpath1 =  Environment.getExternalStorageDirectory().getAbsolutePath() + fpath;
+		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + fpath);
         fileName = name;
         dir.mkdirs();
         file = new File(dir, fileName);
@@ -75,6 +76,6 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
         outputStreamWriter.close();
     }
 	public String getFilePath() throws IOException {
-        return fpath;
+        return fpath1;
 	}
 }

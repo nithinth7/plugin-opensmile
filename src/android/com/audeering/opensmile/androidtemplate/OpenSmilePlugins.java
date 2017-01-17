@@ -31,8 +31,8 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
         SmileJNI.registerListener(this);
 		pname = act.getPackageName();
 		fpath = "/Android/data/" + pname + "/files";
-		fpath1 =  filePath;//Environment.getExternalStorageDirectory().getAbsolutePath() + fpath;
-		dir = new File (filePath);//Environment.getExternalStorageDirectory().getAbsolutePath() + fpath);
+		fpath1 =  Environment.getExternalStorageDirectory().getAbsolutePath() + fpath;
+		dir = new File (Environment.getExternalStorageDirectory().getAbsolutePath() + fpath);
         fileName = name;
         dir.mkdirs();
         file = new File(dir, fileName);

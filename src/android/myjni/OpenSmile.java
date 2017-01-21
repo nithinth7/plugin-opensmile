@@ -28,19 +28,19 @@ public class OpenSmile extends CordovaPlugin {
         throws JSONException {
         if (action.equals("start")) {
             String name = data.getString(0);
-            String path = data.getString(1);
+            String config = data.getString(1);
 			//path = path.substring(7,path.length());
             String fpath = "";
             setupAssets();
             try {
-                m = new OpenSmilePlugins(cordova.getActivity(), name, path);
-                callSmileExtract();
+                m = new OpenSmilePlugins(cordova.getActivity(), name, config);
+                callSmileExtract(config);
 				fpath = m.getFilePath();
             } catch (Exception e) {
                 System.out.println("Exception" + e);
             }
 			
-			String message = fpath + "/" + name;
+			String message = config + ":" + fpath + "/" + name;
             callbackContext.success(message);
             return true;
         } else if (action.equals("stop")) {
@@ -59,15 +59,18 @@ public class OpenSmile extends CordovaPlugin {
         }
     }
 
-    void callSmileExtract() {
-        final SmileThread obj = new SmileThread();
+    void callSmileExtract(String config) {
+        final SmileThread obj = new SmileThread(config);
         final Thread newThread = new Thread(obj);
         newThread.start();
     }
 
     class SmileThread implements Runnable {
-        String  conf = cordova.getActivity().getCacheDir() + "/liveinput_android.conf";
-        @Override
+        String  conf = "";
+        SmileThread(String config) {
+			conf = cordova.getActivity().getCacheDir() + "/" + config;
+		}
+		@Override
         public void run() {
             SmileJNI.SMILExtractJNI(conf, 1);
         }

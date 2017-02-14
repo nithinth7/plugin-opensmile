@@ -14,7 +14,9 @@ Install the plugin
 
     $ cd hello
     $ cordova plugin add https://github.com/nithinth7/plugin-opensmile.git
-    
+
+In build.gradle(Module: android), change java version to 1.7 ( sourceCompatibility JavaVersion.VERSION_1_7
+targetCompatibility JavaVersion.VERSION_1_7)  
 
 Edit `www/js/index.js` and add the following code inside `onDeviceReady`
 

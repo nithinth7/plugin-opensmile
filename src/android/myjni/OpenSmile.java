@@ -3,6 +3,7 @@ package myjni;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
+import android.os.Environment;
 import com.audeering.opensmile.androidtemplate.Config;
 import com.audeering.opensmile.androidtemplate.OpenSmilePlugins;
 import com.audeering.opensmile.androidtemplate.SmileJNI;
@@ -18,10 +19,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import android.util.Base64;
 
 public class OpenSmile extends CordovaPlugin {
     OpenSmilePlugins m;
     Config conf;
+	String fpath = "", fpath1 = "", pname = "";
     
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) 
@@ -30,17 +34,22 @@ public class OpenSmile extends CordovaPlugin {
             String name = data.getString(0);
             String config = data.getString(1);
 			//path = path.substring(7,path.length());
-            String fpath = "";
+            
             setupAssets();
             try {
-                m = new OpenSmilePlugins(cordova.getActivity(), name, config);
-                callSmileExtract(config);
-				fpath = m.getFilePath();
+                //m = new OpenSmilePlugins(cordova.getActivity(), name);
+				pname = cordova.getActivity().getPackageName();
+				fpath1 = "/Android/data/" + pname + "/files";
+				//fpath1 =  filePath;
+				fpath = Environment.getExternalStorageDirectory().getAbsolutePath() + fpath1;
+				//fpath = m.getFilePath();
+                callSmileExtract(config, fpath);
+				
             } catch (Exception e) {
                 System.out.println("Exception" + e);
             }
 			
-			String message = config + ":" + fpath + "/" + name;
+			String message = "Filepath:" + fpath + "/" + name;
             callbackContext.success(message);
             return true;
         } else if (action.equals("stop")) {
@@ -59,20 +68,44 @@ public class OpenSmile extends CordovaPlugin {
         }
     }
 
-    void callSmileExtract(String config) {
-        final SmileThread obj = new SmileThread(config);
+    void callSmileExtract(String config, String fpath) {
+        final SmileThread obj = new SmileThread(config, fpath);
         final Thread newThread = new Thread(obj);
         newThread.start();
     }
 
     class SmileThread implements Runnable {
-        String  conf = "";
-        SmileThread(String config) {
+        String conf = "";
+		String dataPath = "";
+		String filePath = "";
+        SmileThread(String config, String fpath) {
 			conf = cordova.getActivity().getCacheDir() + "/" + config;
+			filePath = fpath;
+			dataPath = fpath + "/test50.bin";
 		}
 		@Override
         public void run() {
-            SmileJNI.SMILExtractJNI(conf, 1);
+            SmileJNI.SMILExtractJNI(conf, 1, dataPath);
+			try {
+                byte[] b = IOUtil.readFile(dataPath);
+                final String b64 = Base64.encodeToString(b,Base64.DEFAULT);
+                String dataPathText = filePath + "/test50.txt";
+                try {
+                    File f = new File(dataPathText);
+                    FileOutputStream fos = new FileOutputStream(f);
+                    PrintWriter pw = new PrintWriter(fos);
+                    pw.print(b64);
+                    pw.flush();
+                    pw.close();
+                    fos.close();
+                }
+                catch (IOException e) {
+                    Log.e("Exception", "File write failed: " + e.toString());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

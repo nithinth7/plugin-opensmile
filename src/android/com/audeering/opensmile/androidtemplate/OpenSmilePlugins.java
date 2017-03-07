@@ -26,7 +26,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
     File dir;
     private static Activity act;
 
-    public OpenSmilePlugins(Activity act, String name, String filePath) throws IOException {
+    public OpenSmilePlugins(Activity act, String name) throws IOException {
         this.act = act;
         SmileJNI.registerListener(this);
 		pname = act.getPackageName();
@@ -55,7 +55,7 @@ public class OpenSmilePlugins implements SmileJNI.Listener {
                     double mid = jo.getJSONObject("floatData").getDouble("1");
                     double bas = jo.getJSONObject("floatData").getDouble("2");
                     features = treb + "," + mid + "," + bas + "\n";
-                    writeToFile(features);
+                    //writeToFile(features);
                     Log.d("SmileLog:",features);
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -6,6 +6,9 @@ import java.util.List;
 public class Config {
     public String[] assets = {
             "liveinput_android.conf",
+						"GenevaExtended_func.conf",
+						"GenevaExtended_lld.conf",
+						"raw_audio_bin.conf",
             "BufferModeRb.conf.inc",
             "features.conf.inc",
             "messages.conf.inc"

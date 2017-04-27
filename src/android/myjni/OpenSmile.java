@@ -33,16 +33,12 @@ public class OpenSmile extends CordovaPlugin {
         if (action.equals("start")) {
             String name = data.getString(0);
             String config = data.getString(1);
-			//path = path.substring(7,path.length());
             
             setupAssets();
             try {
-                //m = new OpenSmilePlugins(cordova.getActivity(), name);
 				pname = cordova.getActivity().getPackageName();
 				fpath1 = "/Android/data/" + pname + "/files";
-				//fpath1 =  filePath;
-				fpath = Environment.getExternalStorageDirectory().getAbsolutePath() + fpath1;
-				//fpath = m.getFilePath();
+				fpath = Environment.getExternalStorageDirectory().getAbsolutePath() + fpath1 + '/' + name;
                 callSmileExtract(config, fpath);
 				
             } catch (Exception e) {
@@ -80,32 +76,11 @@ public class OpenSmile extends CordovaPlugin {
 		String filePath = "";
         SmileThread(String config, String fpath) {
 			conf = cordova.getActivity().getCacheDir() + "/" + config;
-			filePath = fpath;
-			dataPath = fpath + "/test50.bin";
+			dataPath = fpath;
 		}
 		@Override
         public void run() {
             SmileJNI.SMILExtractJNI(conf, 1, dataPath);
-			try {
-                byte[] b = IOUtil.readFile(dataPath);
-                final String b64 = Base64.encodeToString(b,Base64.DEFAULT);
-                String dataPathText = filePath + "/test50.txt";
-                try {
-                    File f = new File(dataPathText);
-                    FileOutputStream fos = new FileOutputStream(f);
-                    PrintWriter pw = new PrintWriter(fos);
-                    pw.print(b64);
-                    pw.flush();
-                    pw.close();
-                    fos.close();
-                }
-                catch (IOException e) {
-                    Log.e("Exception", "File write failed: " + e.toString());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -114,7 +89,6 @@ public class OpenSmile extends CordovaPlugin {
         ans.add(m);
         conf = new Config(ans);
         String[] assets = conf.assets;
-        //SHOULD BE MOVED TO: /data/user/0/com.audeering.opensmile.androidtemplate/cache/
         ContextWrapper cw = new ContextWrapper(this.cordova.getActivity().getApplicationContext());
         String confcach = cw.getCacheDir() + "/" ;
         AssetManager assetManager = this.cordova.getActivity().getAssets();

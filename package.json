@@ -1,9 +1,9 @@
 {
   "name": "cordova-plugin-opensmile",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "description": "cordova plugin for android devices to use feature extraction tool openSMILE",
   "cordova": {
-    "id": "plugin.opensmile",
+    "id": "cordova-plugin-opensmile",
     "platforms": [
       "android",
       "ios",

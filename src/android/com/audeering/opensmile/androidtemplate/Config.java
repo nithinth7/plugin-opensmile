@@ -18,7 +18,7 @@ public class Config {
     };
 
     public String mainConf = "liveinput_android.conf";
-    List<OpenSmilePlugins> plugins = new ArrayList<>();
+    ArrayList plugins = new ArrayList<OpenSmilePlugins>();
 
     public Config(ArrayList<OpenSmilePlugins> op) {
         for(int i=0; i < op.size(); i++)

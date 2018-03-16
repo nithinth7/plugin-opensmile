@@ -12,9 +12,27 @@ Create a new Cordova Project
     
 Install the plugin
 
-    $ cd hello
+    $ cd opensmile
+    $ cordova platform add android
     $ cordova plugin add https://github.com/nithinth7/plugin-opensmile.git
+
+Change the android-targetSdkVersion to 22 in the config.xml if possible (otherwise you have to explicitly ask for permissions to record audio and to write to disk):
+
+```xml
+
+<widget ...>
+    ...
+    <platform name="android">
+	...
+	<preference name="android-targetSdkVersion" value="22" />
+    </platform>
+    ...
+</widget>
+```
+
+Deploy the app on Android:
     
+    $ cordova run android
 
 Edit `www/js/index.js` and add the following code inside `onDeviceReady`
 
